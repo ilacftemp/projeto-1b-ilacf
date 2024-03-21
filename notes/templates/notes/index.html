@@ -1,0 +1,37 @@
+{% extends "notes/base.html" %}
+{% load static %}
+{% block content %}
+<div class="appbar">
+  <img src="{% static 'notes/img/logo-getit.png' %}" class="logo" />
+  <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+</div>
+
+<main class="container">
+  <form class="form-card" method="post">
+    {% csrf_token %}
+    <input type="text" name="titulo" class="form-card-title" placeholder="Título"/>
+    <textarea name="detalhes" class="autoresize" placeholder="Digite o conteúdo..."></textarea>
+    <input type="text" name="tag" class="form-tag" placeholder="Tag"/>
+    <button class="btn" type="submit">Criar</button>
+  </form>
+
+  <a href="notes/tags.html" class="btn tag-page">Tags</a>
+
+  <div class="card-container">
+    {% for note in notes %}
+    <div class="card">
+      <div class="icones">
+        <a href="delete/{{ note.id }}" class="deledit-btn"><img src="{% static 'notes/img/bin.png' %}" class="icone"/></a>
+        <a href="edit/{{ note.id }}" class="deledit-btn" id="editButton"><img src="{% static 'notes/img/edit.png' %}" class="icone"/></a>
+      </div>
+      <div class="t-c-t">
+        <h3 class="card-title">{{ note.title }}</h3>
+        <div class="card-content"><p>{{note.content}}</p>
+        </div>
+        <a href="tag/{{ note.tag }}" class="card-tag">{{ note.tag }}</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

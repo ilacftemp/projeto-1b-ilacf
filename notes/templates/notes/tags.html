@@ -1,0 +1,23 @@
+{% extends "notes/base.html" %}
+{% load static %}
+{% block content %}
+<div class="appbar">
+    <img src="{% static 'notes/img/logo-getit.png' %}" class="logo" />
+    <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+</div>
+
+<main class="pag-tags">
+    <div class="cabecalho">
+        <a href="{% static '../' %}"><img class="icone voltar-tags" src="{% static 'notes/img/back-button.png' %}"/></a>
+        <p class="nome-tag">Tags existentes</p>
+    </div>
+    <div class="card-container">
+        {% for tag in tags %}
+        <div class="card tags">
+        <a href="tag/{{ tag.title }}" class="card-tags">{{ tag.title }}</a>
+        <a href="delete/{{ tag.title }}" class="deledit-btn"><img src="{% static 'notes/img/bin.png' %}" class="icone"/></a>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}
